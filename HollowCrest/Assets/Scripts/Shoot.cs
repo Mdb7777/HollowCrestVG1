@@ -9,7 +9,7 @@ public class Shoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+     
     }
 
     // Update is called once per frame
@@ -17,7 +17,16 @@ public class Shoot : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            Instantiate(bulletPrefab, shootingPoint.position, transform.rotation);
+            GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, transform.rotation);
+            Destroy(bullet, 1.0f);
+            
+        }
+        if (Input.GetButtonDown("Fire2"))
+        {
+            GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, transform.rotation);
+            Destroy(bullet, 0.2f);
         }
     }
+
+    
 }
