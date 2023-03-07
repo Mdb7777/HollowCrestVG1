@@ -8,7 +8,8 @@ public class PlayerMovement : MonoBehaviour
     int jumpAmount = 16;
     float inputHorizontal;
     float inputVertical;
-        float speed = 2f;
+    public float speed ;
+    public float jumpPower;
 
  
 
@@ -21,18 +22,21 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        inputHorizontal = Input.GetAxisRaw("Horizontal");
+        float dirX = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
         
         if (inputHorizontal != 0)
         {
             playerbody.AddForce(new Vector2(inputHorizontal * speed, 0f));
         }
-        if (inputHorizontal > 0)
+        
+        playerbody.velocity = new Vector2(dirX * speed, playerbody.velocity.y);
+
+        if (dirX > 0)
         {
             gameObject.transform.localScale = new Vector3(1, 1, 1);
         }
-        if (inputHorizontal < 0)
+        if (dirX < 0)
         {
             gameObject.transform.localScale = new Vector3(-1, 1, 1);
         }
@@ -41,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 7f);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpPower);
         }
         
     }
