@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+   
     Rigidbody2D playerbody;
-    int jumpAmount = 16;
+    int jumpAmount = 0;
     float inputHorizontal;
     float inputVertical;
     public float speed ;
     public float jumpPower;
+    public ProjectileBehaviour LaunchProjectilePrefab;
+    public Transform LaunchOffset;
+    public bool Right;
+    
 
  
 
@@ -35,17 +40,29 @@ public class PlayerMovement : MonoBehaviour
         if (dirX > 0)
         {
             gameObject.transform.localScale = new Vector3(1, 1, 1);
+            Right = true;
         }
         if (dirX < 0)
         {
             gameObject.transform.localScale = new Vector3(-1, 1, 1);
+            Right = false;
         }
+
+        if (Input.GetButtonDown("Fire2"))
+       {
+           Instantiate(LaunchProjectilePrefab, LaunchOffset.position, transform.rotation);
+       }
       
 
 
         if (Input.GetButtonDown("Jump"))
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpPower);
+            if (jumpAmount < 2)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpPower);
+                jumpAmount = jumpAmount + 1;
+            }
+            
         }
         
     }
