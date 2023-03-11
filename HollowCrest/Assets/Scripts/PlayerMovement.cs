@@ -12,8 +12,11 @@ public class PlayerMovement : MonoBehaviour
     public float speed ;
     public float jumpPower;
     public ProjectileBehaviour LaunchProjectilePrefab;
-    public Transform LaunchOffset;
+    public Transform RightLaunchOffset;
+    public Transform LeftLaunchOffset;
     public bool Right;
+    private bool doubleJump;
+   
     
 
  
@@ -39,20 +42,28 @@ public class PlayerMovement : MonoBehaviour
 
         if (dirX > 0)
         {
-            gameObject.transform.localScale = new Vector3(1, 1, 1);
+            gameObject.transform.localScale = new Vector3(.6f, .6f, .6f);
             Right = true;
         }
         if (dirX < 0)
         {
-            gameObject.transform.localScale = new Vector3(-1, 1, 1);
+            gameObject.transform.localScale = new Vector3(-0.6f, 0.6f, 0.6f);
             Right = false;
         }
 
         if (Input.GetButtonDown("Fire2"))
-       {
-           Instantiate(LaunchProjectilePrefab, LaunchOffset.position, transform.rotation);
-       }
-      
+        {
+            if (Right == true)
+            {
+                Instantiate(LaunchProjectilePrefab, RightLaunchOffset.position, transform.rotation);
+
+            }
+            if (Right == false)
+            {
+                Instantiate(LaunchProjectilePrefab, LeftLaunchOffset.position, transform.rotation);
+
+            }
+        }
 
 
         if (Input.GetButtonDown("Jump"))
@@ -64,7 +75,9 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
+
         
     }
+    
     
 }

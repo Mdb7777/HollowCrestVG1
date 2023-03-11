@@ -18,11 +18,13 @@ public class ProjectileBehaviour : MonoBehaviour
             {
                 var direction = transform.right + Vector3.up;
                 GetComponent<Rigidbody2D>().AddForce(direction * Speed, ForceMode2D.Impulse);
+                gameObject.transform.localScale = new Vector3(.6f, .6f, .6f);
             }
             if (Player.Right == false)
             {
-                var direction = transform.right + Vector3.up;
+                var direction = -transform.right + Vector3.up;
                 GetComponent<Rigidbody2D>().AddForce(direction * Speed, ForceMode2D.Impulse);
+                gameObject.transform.localScale = new Vector3(-.6f, .6f, .6f);
             }
         }
         transform.Translate(LaunchOffset);
@@ -32,9 +34,13 @@ public class ProjectileBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Thrown)
+        if (!Thrown)
         {
-            transform.position += transform.right * Speed * Time.deltaTime;
+            
+            
+                transform.position += transform.right * Speed * Time.deltaTime;
+            
+            
         }
     }
     private void OnCollisionEnter2D(Collision2D collsion)

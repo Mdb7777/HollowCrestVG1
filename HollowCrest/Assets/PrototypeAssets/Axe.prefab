@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6858372895015631234}
-  - component: {fileID: 6858372895015631237}
   - component: {fileID: 6858372895015631236}
   - component: {fileID: 6858372895015631239}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,29 +27,13 @@ Transform:
   m_GameObject: {fileID: 6858372895015631238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.3878444, y: -0.659225, z: -7.7375765}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6858372896024360774}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &6858372895015631237
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6858372895015631238}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.040269673, y: -0.10067415}
-  serializedVersion: 2
-  m_Radius: 0.7617528
 --- !u!50 &6858372895015631236
 Rigidbody2D:
   serializedVersion: 4
@@ -87,6 +70,7 @@ MonoBehaviour:
   Speed: 5
   LaunchOffset: {x: 0.5, y: 0.5, z: 0}
   Thrown: 1
+  Player: {fileID: 0}
 --- !u!1 &6858372896024360777
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +81,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6858372896024360774}
   - component: {fileID: 6858372896024360775}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TempAxeSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
