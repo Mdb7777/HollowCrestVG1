@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
    
     Rigidbody2D playerbody;
+    public Animator animator;
     int jumpAmount;
     float inputHorizontal;
     float inputVertical;
@@ -40,8 +41,10 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         float dirX = Input.GetAxisRaw("Horizontal");
-        inputVertical = Input.GetAxisRaw("Vertical");
-        
+        inputVertical = Input.GetAxisRaw("Vertical");        
+
+        animator.SetFloat("Speed", Mathf.Abs(dirX));
+
         if (inputHorizontal != 0)
         {
             playerbody.AddForce(new Vector2(inputHorizontal * speed, 0f));
