@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4388670083495959014}
   - component: {fileID: 4388670083495959009}
   - component: {fileID: 4388670083495959008}
-  - component: {fileID: 8977061029408992461}
   - component: {fileID: 9169291760378772532}
+  - component: {fileID: -8122486708999064352}
+  - component: {fileID: 4696973961720606867}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -107,18 +108,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8977061029408992461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4388670083495959011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3b2dea7d67020d4096f292130972d16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &9169291760378772532
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -135,3 +124,40 @@ CircleCollider2D:
   m_Offset: {x: -1.6831274, y: 0.20964204}
   serializedVersion: 2
   m_Radius: 0.5270779
+--- !u!50 &-8122486708999064352
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4388670083495959011}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 3
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 20
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &4696973961720606867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4388670083495959011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0131364b782a54f469ce8533fafdfbe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currState: 0
+  target: {fileID: 0}
+  range: 10
+  moveSpeed: 2
