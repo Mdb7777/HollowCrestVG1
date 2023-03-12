@@ -7,6 +7,7 @@ public enum EnemyState
     Wander,
     Follow,
     Die,
+    Attack,
 };
 
 public class EnemyAI_1 : MonoBehaviour
@@ -17,9 +18,11 @@ public class EnemyAI_1 : MonoBehaviour
     Rigidbody2D myRigidbody;
 
     public float range = 2f;
+    public float attackRange = 1f;
     public float moveSpeed = 2f;
 
-
+    public bool flip;
+    Vector3 scale;
 
     void Start()
     {
@@ -30,6 +33,7 @@ public class EnemyAI_1 : MonoBehaviour
 
     void Update()
     {
+        Vector3 scale = transform.localScale;
 
         switch (currState)
         {
@@ -42,6 +46,9 @@ public class EnemyAI_1 : MonoBehaviour
             case (EnemyState.Die):
                 // Die();
                 break;
+            case (EnemyState.Attack):
+                Follow();
+                break;
         }
 
         if (IsPlayerInRange(range) && currState != EnemyState.Die)
@@ -52,6 +59,12 @@ public class EnemyAI_1 : MonoBehaviour
         {
             currState = EnemyState.Wander;
         }
+        else if (!IsPlayerInRange(attackRange) && currState != EnemyState.Die)
+        {
+            currState = EnemyState.Attack;
+        }
+
+        transform.localScale = scale;
     }
 
     private bool IsPlayerInRange(float range)
@@ -87,12 +100,26 @@ public class EnemyAI_1 : MonoBehaviour
 
     void Follow()
     {
-        if (isFacingRight())
+        /*if (isFacingRight())
         {
             myRigidbody.velocity = new Vector2(-moveSpeed, 0f);
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.position.x, transform.position.y), moveSpeed * Time.deltaTime);
 
+        }*/
+        if (player.transform.position.x > transform.position.x)
+        {
+            scale.x = Mathf.Abs(scale.x) * -1 * (flip ? -1 : 1);
+            transform.Translate(x: moveSpeed * Time.deltaTime, y: 0, z: 0);
         }
-        
+        else
+        {
+            scale.x = Mathf.Abs(scale.x) * (flip ? -1 : 1);
+            transform.Translate(x: moveSpeed * Time.deltaTime * -1, y: 0, z: 0);
+        }
+    }
+
+    void Attack()
+    {
+
     }
 }

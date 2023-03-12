@@ -11,7 +11,7 @@ public enum EnemyState2
 
 public class EnemyAI_2 : MonoBehaviour
 {
-    GameObject player;
+    public GameObject player;
     public EnemyState2 currState = EnemyState2.Wander;
     public Transform target;
     Rigidbody2D myRigidbody;
@@ -20,7 +20,8 @@ public class EnemyAI_2 : MonoBehaviour
     public float moveSpeed = 2f;
     public float moveSpeedV = 0f;
 
-
+    public bool flip;
+    Vector3 scale;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class EnemyAI_2 : MonoBehaviour
 
     void Update()
     {
+        Vector3 scale = transform.localScale;
 
         switch (currState)
         {
@@ -53,6 +55,7 @@ public class EnemyAI_2 : MonoBehaviour
         {
             currState = EnemyState2.Wander;
         }
+        transform.localScale = scale;
     }
 
     private bool IsPlayerInRange(float range)
@@ -92,12 +95,21 @@ public class EnemyAI_2 : MonoBehaviour
 
     void Follow()
     {
-        if (isFacingRight())
+        /*if (isFacingRight())
         {
             myRigidbody.velocity = new Vector2(-moveSpeed, 0f);
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.position.x, transform.position.y), moveSpeed * Time.deltaTime);
 
+        }*/
+        if (player.transform.position.x > transform.position.x)
+        {
+            scale.x = Mathf.Abs(scale.x) * -1 * (flip ? -1 : 1);
+            transform.Translate(x: moveSpeed * Time.deltaTime, y: 0, z: 0);
         }
-        
+        else
+        {
+            scale.x = Mathf.Abs(scale.x) * (flip ? -1 : 1);
+            transform.Translate(x: moveSpeed * Time.deltaTime * -1, y: 0, z: 0);
+        }
     }
 }
