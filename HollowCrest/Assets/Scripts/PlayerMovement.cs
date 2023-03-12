@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
    
     Rigidbody2D playerbody;
-    int jumpAmount = 0;
+    int jumpAmount;
     float inputHorizontal;
     float inputVertical;
     public float speed ;
@@ -16,15 +16,24 @@ public class PlayerMovement : MonoBehaviour
     public Transform LeftLaunchOffset;
     public bool Right;
     private bool doubleJump;
-   
-    
+    public int Mana;
+    public int Health;
+    public bool AxeObtained;
+    public bool isGrounded;
+    public SwingScript SwingHitbox;
 
- 
+
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         playerbody = GetComponent<Rigidbody2D>();
+        Mana = 100;
+        Health = 100;
+        AxeObtained = false;
+        jumpAmount = 0;
     }
 
     // Update is called once per frame
@@ -42,42 +51,102 @@ public class PlayerMovement : MonoBehaviour
 
         if (dirX > 0)
         {
-            gameObject.transform.localScale = new Vector3(.6f, .6f, .6f);
+            gameObject.transform.localScale = new Vector3(.3f, .3f, .3f);
             Right = true;
         }
         if (dirX < 0)
         {
-            gameObject.transform.localScale = new Vector3(-0.6f, 0.6f, 0.6f);
+            gameObject.transform.localScale = new Vector3(-0.3f, 0.3f, 0.3f);
             Right = false;
         }
-
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Instantiate(SwingHitbox, RightLaunchOffset.position, transform.rotation);
+        }
         if (Input.GetButtonDown("Fire2"))
         {
-            if (Right == true)
+            if (AxeObtained == true)
             {
-                Instantiate(LaunchProjectilePrefab, RightLaunchOffset.position, transform.rotation);
-
-            }
-            if (Right == false)
-            {
-                Instantiate(LaunchProjectilePrefab, LeftLaunchOffset.position, transform.rotation);
-
+                if (Mana > 0)
+                {
+                    if (Right == true)
+                    {
+                        Instantiate(LaunchProjectilePrefab, RightLaunchOffset.position, transform.rotation);
+                        Mana = Mana - 10;
+                    }
+                    if (Right == false)
+                    {
+                        Instantiate(LaunchProjectilePrefab, LeftLaunchOffset.position, transform.rotation);
+                        Mana = Mana - 10;
+                    }
+                    
+                }
             }
         }
 
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (jumpAmount < 2)
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpPower);
-                jumpAmount = jumpAmount + 1;
-            }
-            
-        }
 
+            Jump();
+        }
         
     }
-    
-    
+    public void Jump()
+    {
+
+        if (jumpAmount > 0)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpPower);
+            isGrounded = false;
+            jumpAmount = jumpAmount - 1;
+        }
+        if (jumpAmount == 0)
+        {
+            return;
+        }
+    }
+    public int GetMana()
+    {
+        return Mana;
+    }
+    public int GetHealth()
+    {
+        return Health;
+    }
+    public void CollectMana()
+    {
+        if (Mana < 100)
+        {
+            Mana = 100;
+        }
+    }
+    public void CollectHealth()
+    {
+        if (Health < 100)
+        {
+            Health = 100;
+        }
+    }
+    public void TakeDamage()
+    {
+        Health -= 10;
+        Debug.Log(Health);
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+    public void ObtainAxe()
+    {
+        AxeObtained = true;
+    }
+    void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (collider.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            jumpAmount = 2;
+        }
+    }
 }

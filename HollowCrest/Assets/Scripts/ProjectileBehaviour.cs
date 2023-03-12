@@ -43,8 +43,11 @@ public class ProjectileBehaviour : MonoBehaviour
             
         }
     }
-    private void OnCollisionEnter2D(Collision2D collsion)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        Destroy(gameObject);
+        if (collider.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }
     }
 }
