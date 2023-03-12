@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform LeftLaunchOffset;
     public bool Right;
     private bool doubleJump;
+    public int Mana;
    
     
 
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         playerbody = GetComponent<Rigidbody2D>();
+        Mana = 100;
     }
 
     // Update is called once per frame
@@ -53,15 +55,18 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2"))
         {
-            if (Right == true)
+            if (Mana > 0)
             {
-                Instantiate(LaunchProjectilePrefab, RightLaunchOffset.position, transform.rotation);
-
-            }
-            if (Right == false)
-            {
-                Instantiate(LaunchProjectilePrefab, LeftLaunchOffset.position, transform.rotation);
-
+                if (Right == true)
+                {
+                    Instantiate(LaunchProjectilePrefab, RightLaunchOffset.position, transform.rotation);
+                    Mana = Mana - 10;
+                }
+                if (Right == false)
+                {
+                    Instantiate(LaunchProjectilePrefab, LeftLaunchOffset.position, transform.rotation);
+                    Mana = Mana - 10;
+                }
             }
         }
 
@@ -77,7 +82,19 @@ public class PlayerMovement : MonoBehaviour
         }
 
         
+
+        
     }
-    
-    
+    public int GetMana()
+    {
+        return Mana;
+    }
+    public void CollectMana()
+    {
+        if (Mana < 100)
+        {
+            Mana = 100;
+        }
+    }
+   
 }
