@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
    
     Rigidbody2D playerbody;
-    int jumpAmount = 0;
+    int jumpAmount;
     float inputHorizontal;
     float inputVertical;
     public float speed ;
@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public int Mana;
     public int Health;
     public bool AxeObtained;
+    public bool isGrounded;
 
 
 
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         Mana = 100;
         Health = 100;
         AxeObtained = false;
+        jumpAmount = 0;
     }
 
     // Update is called once per frame
@@ -56,7 +58,10 @@ public class PlayerMovement : MonoBehaviour
             gameObject.transform.localScale = new Vector3(-0.6f, 0.6f, 0.6f);
             Right = false;
         }
+        if (Input.GetButtonDown("Fire1"))
+        {
 
+        }
         if (Input.GetButtonDown("Fire2"))
         {
             if (AxeObtained == true)
@@ -73,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
                         Instantiate(LaunchProjectilePrefab, LeftLaunchOffset.position, transform.rotation);
                         Mana = Mana - 10;
                     }
-                    Debug.Log(Mana);
+                    
                 }
             }
         }
@@ -81,18 +86,24 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (jumpAmount < 2)
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpPower);
-                jumpAmount = jumpAmount + 1;
-            }
-            
+
+            Jump();
         }
         
+    }
+    public void Jump()
+    {
 
-        
-
-        
+        if (jumpAmount > 0)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpPower);
+            isGrounded = false;
+            jumpAmount = jumpAmount - 1;
+        }
+        if (jumpAmount == 0)
+        {
+            return;
+        }
     }
     public int GetMana()
     {
@@ -125,5 +136,12 @@ public class PlayerMovement : MonoBehaviour
     {
         AxeObtained = true;
     }
-    
+    void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (collider.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            jumpAmount = 2;
+        }
+    }
 }
