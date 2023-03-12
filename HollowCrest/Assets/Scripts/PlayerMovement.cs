@@ -50,12 +50,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (dirX > 0)
         {
-            gameObject.transform.localScale = new Vector3(.6f, .6f, .6f);
+            gameObject.transform.localScale = new Vector3(.3f, .3f, .3f);
             Right = true;
         }
         if (dirX < 0)
         {
-            gameObject.transform.localScale = new Vector3(-0.6f, 0.6f, 0.6f);
+            gameObject.transform.localScale = new Vector3(-0.3f, 0.3f, 0.3f);
             Right = false;
         }
         if (Input.GetButtonDown("Fire1"))
