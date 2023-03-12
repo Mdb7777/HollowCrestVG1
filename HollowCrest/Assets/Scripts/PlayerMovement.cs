@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public int Health;
     public bool AxeObtained;
     public bool isGrounded;
+    public SwingScript SwingHitbox;
 
 
 
@@ -60,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire1"))
         {
-
+            Instantiate(SwingHitbox, RightLaunchOffset.position, transform.rotation);
         }
         if (Input.GetButtonDown("Fire2"))
         {
@@ -131,6 +132,10 @@ public class PlayerMovement : MonoBehaviour
     {
         Health -= 10;
         Debug.Log(Health);
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
     public void ObtainAxe()
     {
