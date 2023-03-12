@@ -17,16 +17,20 @@ public class PlayerMovement : MonoBehaviour
     public bool Right;
     private bool doubleJump;
     public int Mana;
-   
-    
+    public int Health;
+    public bool AxeObtained;
 
- 
+
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         playerbody = GetComponent<Rigidbody2D>();
         Mana = 100;
+        Health = 100;
+        AxeObtained = false;
     }
 
     // Update is called once per frame
@@ -55,17 +59,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2"))
         {
-            if (Mana > 0)
+            if (AxeObtained == true)
             {
-                if (Right == true)
+                if (Mana > 0)
                 {
-                    Instantiate(LaunchProjectilePrefab, RightLaunchOffset.position, transform.rotation);
-                    Mana = Mana - 10;
-                }
-                if (Right == false)
-                {
-                    Instantiate(LaunchProjectilePrefab, LeftLaunchOffset.position, transform.rotation);
-                    Mana = Mana - 10;
+                    if (Right == true)
+                    {
+                        Instantiate(LaunchProjectilePrefab, RightLaunchOffset.position, transform.rotation);
+                        Mana = Mana - 10;
+                    }
+                    if (Right == false)
+                    {
+                        Instantiate(LaunchProjectilePrefab, LeftLaunchOffset.position, transform.rotation);
+                        Mana = Mana - 10;
+                    }
+                    Debug.Log(Mana);
                 }
             }
         }
@@ -80,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
+        
 
         
 
@@ -89,6 +98,10 @@ public class PlayerMovement : MonoBehaviour
     {
         return Mana;
     }
+    public int GetHealth()
+    {
+        return Health;
+    }
     public void CollectMana()
     {
         if (Mana < 100)
@@ -96,5 +109,21 @@ public class PlayerMovement : MonoBehaviour
             Mana = 100;
         }
     }
-   
+    public void CollectHealth()
+    {
+        if (Health < 100)
+        {
+            Health = 100;
+        }
+    }
+    public void TakeDamage()
+    {
+        Health -= 10;
+        Debug.Log(Health);
+    }
+    public void ObtainAxe()
+    {
+        AxeObtained = true;
+    }
+    
 }

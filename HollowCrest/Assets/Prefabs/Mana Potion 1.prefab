@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 533719183177273365}
   - component: {fileID: 1053325596770720615}
   - component: {fileID: 1053325596770720611}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mana Potion 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
