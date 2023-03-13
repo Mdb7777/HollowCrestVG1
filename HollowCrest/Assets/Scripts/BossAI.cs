@@ -18,13 +18,13 @@ public class BossAI : MonoBehaviour
     public Transform target;
     Rigidbody2D myRigidbody;
 
-    public bool isGrounded;
-
     public float range = 10f;
     public float attackRange = 1f;
     public float moveSpeed = 2f;
 
     public int health = 5;
+    public int damage = 20;
+    public int rainDamage = 75;
 
     public bool flip;
     Vector3 scale;
@@ -48,6 +48,9 @@ public class BossAI : MonoBehaviour
         {
             case (BossState.Follow):
                 Follow();
+                break;
+            case (BossState.Attack):
+                Attack();
                 break;
             case (BossState.RainAttack):
                 RainAttack();
@@ -105,28 +108,16 @@ public class BossAI : MonoBehaviour
         }
     }
 
-    void RainAttack()
+    void Attack()
     {
-        anim.Play("Sword Rain");
-        FindObjectOfType<PlayerMovement>().TakeAOEDamage();
-        Destroy(gameObject);
+        anim.Play("attack");
+        FindObjectOfType<PlayerMovement>().TakeDamage();
     }
 
-
-    void OnTriggerEnter2D(Collider2D collider)
+    void RainAttack()
     {
-        if (collider.tag == "Player")
-        {
-            FindObjectOfType<PlayerMovement>().TakeDamage();
-        }
-        if (collider.tag == "Weapon")
-        {
-            health -= 1;
-        }
-        if (collider.tag == "Ground")
-        {
-            isGrounded = true;
-        }
-
+        anim.Play("rainAttack");
+        FindObjectOfType<PlayerMovement>().TakeAOEDamage();
+        
     }
 }
