@@ -22,18 +22,22 @@ public class BossAI : MonoBehaviour
     public float attackRange = 1f;
     public float moveSpeed = 2f;
 
-    public int health;
-    public int damage;
-    //barrier variable;
+    public int health = 5;
+    public int damage = 20;
+    public int rainDamage = 75;
 
     public bool flip;
     Vector3 scale;
+
+    private Animation anim;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         myRigidbody = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
+        anim = gameObject.GetComponent<Animation>();
     }
 
     void Update()
@@ -44,9 +48,6 @@ public class BossAI : MonoBehaviour
         {
             case (BossState.Follow):
                 Follow();
-                break;
-            case (BossState.Die):
-                // Die();
                 break;
             case (BossState.Attack):
                 Attack();
@@ -64,7 +65,10 @@ public class BossAI : MonoBehaviour
         {
             currState = BossState.Attack;
         }
-
+        if(health == 0)
+        {
+            currState = BossState.RainAttack;
+        }
         transform.localScale = scale;
     }
 
@@ -104,18 +108,16 @@ public class BossAI : MonoBehaviour
         }
     }
 
-    void Die()
-    {
-        
-    }
-
     void Attack()
     {
-
+        anim.Play("attack");
+        FindObjectOfType<PlayerMovement>().TakeDamage();
     }
 
     void RainAttack()
     {
-
+        anim.Play("rainAttack");
+        FindObjectOfType<PlayerMovement>().TakeAOEDamage();
+        
     }
 }

@@ -112,4 +112,17 @@ public class EnemyAI_2 : MonoBehaviour
             transform.Translate(x: moveSpeed * Time.deltaTime * -1, y: 0, z: 0);
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Player")
+        {
+            FindObjectOfType<PlayerMovement>().TakeDamage();
+        }
+        if (collider.tag == "Weapon")
+        {
+            Destroy(gameObject);
+        }
+
+    }
 }

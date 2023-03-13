@@ -140,6 +140,15 @@ public class PlayerMovement : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void TakeAOEDamage()
+    {
+        Health -= 50;
+        Debug.Log(Health);
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
     public void ObtainAxe()
     {
         AxeObtained = true;

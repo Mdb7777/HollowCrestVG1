@@ -59,10 +59,6 @@ public class EnemyAI_1 : MonoBehaviour
         {
             currState = EnemyState.Wander;
         }
-        else if (!IsPlayerInRange(attackRange) && currState != EnemyState.Die)
-        {
-            currState = EnemyState.Attack;
-        }
 
         transform.localScale = scale;
     }
@@ -82,7 +78,7 @@ public class EnemyAI_1 : MonoBehaviour
         {
             if (isFacingRight())
             {
-                myRigidbody.velocity = new Vector2(moveSpeed, 0f);
+                myRigidbody.velocity = new Vector2(moveSpeed, 0f); 
             }
             else
             {
@@ -118,8 +114,16 @@ public class EnemyAI_1 : MonoBehaviour
         }
     }
 
-    void Attack()
+    void OnTriggerEnter2D(Collider2D collider)
     {
+        if (collider.tag == "Player")
+        {
+            FindObjectOfType<PlayerMovement>().TakeDamage();
+        }
+        if (collider.tag == "Weapon")
+        {
+            Destroy(gameObject);
+        }
 
     }
 }
