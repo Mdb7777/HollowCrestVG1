@@ -23,6 +23,8 @@ public class BossAI : MonoBehaviour
     public float moveSpeed = 2f;
 
     public int health = 5;
+    public int damage = 20;
+    public int rainDamage = 75;
 
     public bool flip;
     Vector3 scale;
@@ -108,13 +110,13 @@ public class BossAI : MonoBehaviour
 
     void Attack()
     {
-        anim.Play("Attack");
+        anim.Play("attack");
         FindObjectOfType<PlayerMovement>().TakeDamage();
     }
 
     void RainAttack()
     {
-        anim.Play("Rain Attack");
+        anim.Play("rainAttack");
         FindObjectOfType<PlayerMovement>().TakeAOEDamage();
         
     }
