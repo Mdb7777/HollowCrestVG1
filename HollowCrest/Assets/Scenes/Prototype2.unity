@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &32701217 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1875188102610758927, guid: 9be01f6131250fa44bcd5577c0481b86, type: 3}
+  m_PrefabInstance: {fileID: 1875188101084396397}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &591197891
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,5 +638,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1875188101096831516, guid: 9be01f6131250fa44bcd5577c0481b86, type: 3}
+      propertyPath: RightLaunchOffset
+      value: 
+      objectReference: {fileID: 32701217}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9be01f6131250fa44bcd5577c0481b86, type: 3}

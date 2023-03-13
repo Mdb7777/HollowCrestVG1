@@ -106,14 +106,14 @@ MonoBehaviour:
   speed: 10
   jumpPower: 10
   LaunchProjectilePrefab: {fileID: 6858372895015631239, guid: 0e674c928074ba7498d5c5469ff1347f, type: 3}
-  RightLaunchOffset: {fileID: 0}
+  RightLaunchOffset: {fileID: 1875188102610758927}
   LeftLaunchOffset: {fileID: 0}
   Right: 0
   Mana: 0
   Health: 0
   AxeObtained: 0
   isGrounded: 0
-  SwingHitbox: {fileID: 0}
+  SwingHitbox: {fileID: -8823663604504417533, guid: 97beea38cca5d5a48b6708397458ddca, type: 3}
 --- !u!50 &1875188101096831517
 Rigidbody2D:
   serializedVersion: 4
