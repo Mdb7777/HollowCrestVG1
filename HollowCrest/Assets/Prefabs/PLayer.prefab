@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -5173242318844965717}
   m_Layer: 0
   m_Name: PLayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 1169701995, guid: fc99a74f0788d4848a25bf5548139cd6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -104,10 +104,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: -5173242318844965717}
   speed: 10
-  jumpPower: 10
+  jumpPower: 7
   LaunchProjectilePrefab: {fileID: 6858372895015631239, guid: 0e674c928074ba7498d5c5469ff1347f, type: 3}
   RightLaunchOffset: {fileID: 1875188102610758927}
-  LeftLaunchOffset: {fileID: 0}
+  LeftLaunchOffset: {fileID: 1875188102610758927}
   Right: 0
   Mana: 0
   Health: 0

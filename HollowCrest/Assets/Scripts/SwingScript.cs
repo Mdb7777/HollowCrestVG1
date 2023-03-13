@@ -15,12 +15,12 @@ public class SwingScript : MonoBehaviour
             if (Player.Right == true)
             {
                 
-                gameObject.transform.localScale = new Vector3(.3f, .3f, .3f);
+                gameObject.transform.localScale = new Vector3(.5f, .5f, .5f);
             }
             if (Player.Right == false)
             {
                 
-                gameObject.transform.localScale = new Vector3(-.3f, .3f, .3f);
+                gameObject.transform.localScale = new Vector3(-.5f, .5f, .5f);
             }
         StartCoroutine(waiter());
     }
